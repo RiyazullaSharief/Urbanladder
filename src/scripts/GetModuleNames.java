@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
 public class GetModuleNames
 {
 	public static void main(String[] args) throws InterruptedException
@@ -21,13 +23,21 @@ public class GetModuleNames
 		List<WebElement> menu=driver.findElements(By.xpath("//span[@class='topnav_itemname']|//a[.='Interiors']"));
 		Actions act=new Actions(driver);
 		
+		String[] expectedTitle={"Sale","Living","Bedroom","Dining","Storage","Study","Mattresses","Interiors","Decor","New","Collections"};
+		int i=0;
 		for(WebElement a:menu)
 		{
-			String text=a.getText();
-			System.out.println(text);
+			String actualTitle=a.getText();
+			System.out.println(actualTitle);
+			Assert.assertEquals(actualTitle,expectedTitle[i]);
+			Reporter.log("Success...!!",true);
 			act.moveToElement(a).perform();
+			i++;
 			Thread.sleep(3000);
 		}
+		
+		
+		
 		driver.close();
 	}
 }
