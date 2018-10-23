@@ -30,14 +30,11 @@ public class GetModuleNames
 			String actualTitle=a.getText();
 			System.out.println(actualTitle);
 			Assert.assertEquals(actualTitle,expectedTitle[i]);
-			Reporter.log("Success...!!",true);
+			Reporter.log("Matched...!!",true);
 			act.moveToElement(a).perform();
 			i++;
 			Thread.sleep(3000);
 		}
-		
-		
-		
 		driver.close();
 	}
 }
